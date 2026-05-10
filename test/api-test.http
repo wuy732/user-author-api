@@ -1,0 +1,32 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+
+
+### 测试用户注册
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admmin"
+}
+
+
+
+### 用户登录获取 Token
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+  "username": "test_user",
+  "password": "my_password123"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### 测试访问受保护的接口
+GET http://localhost:3000/users/profile
+Authorization: Bearer {{auth_token}}
